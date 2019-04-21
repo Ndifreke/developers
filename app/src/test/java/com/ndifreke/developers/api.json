@@ -1,0 +1,23 @@
+{
+  "total_count": 623,
+  "incomplete_results": false,
+  "items": [
+    {
+      "login": "ndifreke",
+      "avatar_url": "https://avatars0.githubusercontent.com/u/6637970?v=4",
+      "url": "https://api.github.com/users/k33ptoo",
+
+    },
+    {
+      "login": "jumaallan",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/25085146?v=4",
+      "url": "https://api.github.com/users/jumaallan",
+    },
+    {
+      "login": "kelvinkamau",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/20049411?v=4",
+      "url": "https://api.github.com/users/kelvinkamau",
+    }
+  ]
+}
+

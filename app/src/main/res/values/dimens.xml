@@ -1,0 +1,6 @@
+<resources>
+    <dimen name="fab_margin">16dp</dimen>
+    <dimen name="action_icon">24dp</dimen>
+    <dimen name="heading">24sp</dimen>
+    <dimen name="title">29sp</dimen>
+</resources>
