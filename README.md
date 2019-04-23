@@ -1,3 +1,5 @@
+[![CircleCI](https://circleci.com/gh/Ndifreke/developers/tree/develop.svg?style=svg)](https://circleci.com/gh/Ndifreke/developers/tree/develop)
+[![Maintainability](https://api.codeclimate.com/v1/badges/001155f31a02dbd342a5/maintainability)](https://codeclimate.com/github/Ndifreke/developers/maintainability)
 ## Developers
 
 Developers is a level up application built in process to onboard the Android team of my 
