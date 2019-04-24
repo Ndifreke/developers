@@ -6,4 +6,4 @@ local.properties
 /captures
 .externalNativeBuild
 codeclimate.yml
-
+/app/app.iml
