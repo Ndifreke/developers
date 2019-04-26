@@ -1,4 +1,4 @@
-package com.ndifreke.developers;
+package com.ndifreke.developers.view;
 
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.Toolbar;
@@ -9,6 +9,7 @@ import static com.ndifreke.developers.R.*;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
+import com.ndifreke.developers.R;
 import com.ndifreke.developers.adapter.DeveloperListAdapter;
 
 public class MainActivity extends AppCompatActivity {

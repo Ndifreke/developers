@@ -1,11 +1,13 @@
-package com.ndifreke.developers;
+package com.ndifreke.developers.view;
 
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
-public class ProfileActivity extends AppCompatActivity {
+import com.ndifreke.developers.R;
+
+public class DeveloperProfileActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstance){

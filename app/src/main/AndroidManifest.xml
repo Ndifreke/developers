@@ -12,11 +12,11 @@
         android:theme="@style/Theme.AppCompat.Light.NoActionBar"
         tools:ignore="GoogleAppIndexingWarning">
 
-        <activity android:name=".ProfileActivity"
-            android:parentActivityName=".MainActivity">
+        <activity android:name=".view.DeveloperProfileActivity"
+            android:parentActivityName=".view.MainActivity">
         </activity>
 
-        <activity android:name=".MainActivity">
+        <activity android:name=".view.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
