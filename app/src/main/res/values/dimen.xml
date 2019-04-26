@@ -1,6 +1,9 @@
 <resources>
     <dimen name="fab_margin">16dp</dimen>
-    <dimen name="action_icon">24dp</dimen>
-    <dimen name="heading">24sp</dimen>
-    <dimen name="title">29sp</dimen>
+    <dimen name="actionIconSize">34dp</dimen>
+    <dimen name="headerTextSize">34sp</dimen>
+    <dimen name="titleTextSize">18sp</dimen>
+    <dimen name="bodyTextSize">16sp</dimen>
+    <dimen name="TitleMarginBottom">4dp</dimen>
+    <dimen name="bodyMarginBottom">16dp</dimen>
 </resources>

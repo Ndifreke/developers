@@ -43,8 +43,7 @@
             android:padding="16dp">
 
             <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                style="@style/headerText"
                 android:layout_weight="1"
                 android:text="@string/github_information"
                 android:textColor="@color/colorPrimaryDark"
@@ -52,11 +51,8 @@
                 android:textStyle="bold" />
 
             <ImageView
-                android:layout_width="34dp"
-                android:layout_height="34dp"
+            style="@style/actionIcon"
                 android:contentDescription="@string/share_icon"
-                android:scaleType="fitStart"
-                android:focusable="true"
                 android:src="@drawable/ic_share"/>
 
         </LinearLayout>
@@ -70,41 +66,25 @@
             android:padding="16dp">
 
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                style="@style/titleText"
                 android:text="Name"
-                android:textColor="@color/colorPrimaryDark"
-                android:textFontWeight="1"
-                android:textSize="18sp"
-                android:textStyle="bold" />
+                android:textColor="@color/colorPrimaryDark" />
 
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                style="@style/normalText"
                 android:text="Ndifreke"
-                android:textColor="@color/colorSecondaryDark"
-                android:textFontWeight="1"
-                android:textSize="14sp"
-                android:textStyle="normal" />
+                android:textColor="@color/colorSecondaryDark" />
 
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
+                style="@style/titleText"
                 android:text="Profile Link"
-                android:textColor="@color/colorPrimaryDark"
-                android:textFontWeight="1"
-                android:textSize="18sp"
-                android:textStyle="bold" />
+                android:textColor="@color/colorPrimaryDark" />
 
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                style="@style/normalText"
                 android:text="http://github.com/link/to/profile"
                 android:textColor="@color/colorSecondaryDark"
-                android:textFontWeight="1"
-                android:textSize="14sp"
-                android:textStyle="normal" />
+                android:textFontWeight="1" />
         </LinearLayout>
 
     </LinearLayout>

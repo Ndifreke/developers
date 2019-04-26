@@ -8,13 +8,34 @@
         <item name="android:titleTextColor">@color/colorLight</item>
     </style>
 
-    <style name="title">
-        <item name="android:textSize">@dimen/title</item>
+    <style name="normalText">
+        <item name="android:textSize">@dimen/bodyTextSize</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginBottom">@dimen/bodyMarginBottom</item>
+    </style>
+
+    <style name="headerText">
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:textSize">@dimen/headerTextSize</item>
         <item name="android:textStyle">bold</item>
     </style>
 
-    <style name="header">
-        <item name="android:textSize">@dimen/heading</item>
-        <item name="android:textStyle">normal</item>
+    <style name="titleText">
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:textSize">@dimen/titleTextSize</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:layout_marginBottom">@dimen/TitleMarginBottom</item>
     </style>
+
+    <style name="actionIcon">
+        <item name="android:layout_width">@dimen/actionIconSize</item>
+        <item name="android:layout_height">@dimen/actionIconSize</item>
+        <item name="android:focusable">true</item>
+        <item name="android:clickable">true</item>
+        <item name="android:scaleType">centerCrop</item>
+    </style>
+
 </resources>
