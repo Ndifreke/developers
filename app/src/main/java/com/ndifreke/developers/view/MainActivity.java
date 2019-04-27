@@ -37,7 +37,4 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(layoutManager);
     }
 
-    public void showProfile(View view){
-
-    }
 }
