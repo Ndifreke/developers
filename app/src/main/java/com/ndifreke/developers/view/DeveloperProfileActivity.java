@@ -3,6 +3,7 @@ package com.ndifreke.developers.view;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.support.v7.app.ActionBar;
@@ -11,6 +12,7 @@ import android.support.v7.widget.Toolbar;
 import android.text.Html;
 import android.view.View;
 import android.widget.TextView;
+
 import com.ndifreke.developers.R;
 import com.ndifreke.developers.dialog.ProfileShareDialog;
 import com.ndifreke.developers.model.GithubUser;
@@ -45,15 +47,25 @@ public class DeveloperProfileActivity extends AppCompatActivity {
         TextView name = findViewById(R.id.githubName);
         name.setText(githubUser.getName());
         TextView profileLink = findViewById(R.id.githubLink);
-        profileLink.setText("\\@".concat(githubUser.getAvatarURL()));
+        profileLink.setText(githubUser.getAvatarURL());
     }
 
-    public void shareProfile(View view) {
+    public void openShareDialog(View view) {
         dialog = new ProfileShareDialog(this.githubUser);
         dialog.show(getSupportFragmentManager(), null);
     }
 
-    public void dismisDialog(View view){
+    public void shareProfile(View view) {
+        Intent intent = new Intent(Intent.ACTION_SEND);
+        intent.setType("text/plain");
+        intent.putExtra(Intent.EXTRA_TITLE, "Checkout this Awesome developer");
+        intent.putExtra(Intent.EXTRA_TEXT,
+                String.format("checkout this awesome developer @%1s",
+                        githubUser.getName()));
+        startActivity(intent);
+    }
+
+    public void dismisDialog(View view) {
         this.dialog.dismiss();
     }
 }
