@@ -35,13 +35,24 @@
   />
 
     <TextView
-        android:id="@+id/closeDialog"
+        android:id="@+id/closeButton"
         android:layout_below="@+id/share_github_url"
         android:layout_alignRight="@+id/dialogTitile"
         android:text="@string/dialog_close"
         android:textAllCaps="true"
         style="@style/titleText"
         android:onClick="dismisDialog"
+        android:textColor="@color/colorAccent"
+        android:clickable="true"
+        />
+
+    <TextView
+        android:id="@+id/shareButton"
+        android:layout_below="@+id/share_github_url"
+        android:text="SHARE"
+        android:textAllCaps="true"
+        style="@style/titleText"
+        android:onClick="shareProfile"
         android:textColor="@color/colorAccent"
         android:clickable="true"
         />
