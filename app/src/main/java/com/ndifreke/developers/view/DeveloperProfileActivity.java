@@ -12,17 +12,18 @@ import android.text.Html;
 import android.view.View;
 import android.widget.TextView;
 import com.ndifreke.developers.R;
+import com.ndifreke.developers.dialog.ProfileShareDialog;
 import com.ndifreke.developers.model.GithubUser;
 
 public class DeveloperProfileActivity extends AppCompatActivity {
     private GithubUser githubUser;
+    private ProfileShareDialog dialog;
 
     @Override
     protected void onCreate(Bundle savedInstance) {
         super.onCreate(savedInstance);
         setContentView(R.layout.profile_activity);
         this.initToolbar();
-
         Intent intent = getIntent();
         Parcelable parcelable
                 = intent.getParcelableExtra("com.ndifreke.developers.model.GithubUser");
@@ -44,24 +45,15 @@ public class DeveloperProfileActivity extends AppCompatActivity {
         TextView name = findViewById(R.id.githubName);
         name.setText(githubUser.getName());
         TextView profileLink = findViewById(R.id.githubLink);
-        profileLink.setText(githubUser.getAvatarURL());
+        profileLink.setText("\\@".concat(githubUser.getAvatarURL()));
     }
 
     public void shareProfile(View view) {
-        AlertDialog alertDialog = new AlertDialog.Builder(this).create();
-        alertDialog.setTitle("Checkout this Awesome Developer");
+        dialog = new ProfileShareDialog(this.githubUser);
+        dialog.show(getSupportFragmentManager(), null);
+    }
 
-        alertDialog.setMessage(Html.fromHtml(
-                String.format("<strong>@%1s</strong> <br> <br> %2s",
-                        githubUser.getName(), githubUser.getProfileURL()))
-        );
-        alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "CLOSE",
-                new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                    }
-                });
-        alertDialog.show();
+    public void dismisDialog(View view){
+        this.dialog.dismiss();
     }
 }
