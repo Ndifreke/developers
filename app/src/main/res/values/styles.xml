@@ -1,28 +1,29 @@
 <resources>
 
+<style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+    <item name="colorPrimary">@color/colorPrimary</item>
+    <item name="colorPrimaryDark">@color/colorPrimary</item>
+</style>
+
     <style name="appbarTheme">
         <item name="android:textColorPrimary">@color/colorLight</item>
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
-        <item name="android:titleTextColor">@color/colorLight</item>
     </style>
 
-    <style name="normalText">
+    <style name="normalText" parent="android:TextAppearance">
         <item name="android:textSize">@dimen/bodyTextSize</item>
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_marginBottom">@dimen/bodyMarginBottom</item>
     </style>
 
-    <style name="headerText">
+    <style name="headerText"  parent="android:TextAppearance">
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_width">wrap_content</item>
         <item name="android:textSize">@dimen/headerTextSize</item>
         <item name="android:textStyle">bold</item>
     </style>
 
-    <style name="titleText">
+    <style name="titleText"  parent="android:TextAppearance">
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_width">wrap_content</item>
         <item name="android:textSize">@dimen/titleTextSize</item>

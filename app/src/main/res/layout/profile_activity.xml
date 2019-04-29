@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -18,15 +17,15 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <android.support.v7.widget.Toolbar
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintEnd_toStartOf="parent"
             android:id="@+id/profileToolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/colorPrimary"
             android:theme="@style/appbarTheme"
-            app:navigationIcon="@drawable/ic_back_button"/>
+            app:layout_constraintEnd_toStartOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:navigationIcon="@drawable/ic_back_button" />
 
         <ImageView
             android:layout_width="match_parent"
@@ -51,9 +50,10 @@
                 android:textStyle="bold" />
 
             <ImageView
-            style="@style/actionIcon"
+                style="@style/actionIcon"
                 android:contentDescription="@string/share_icon"
-                android:src="@drawable/ic_share"/>
+                android:src="@drawable/ic_share"
+                android:onClick="shareProfile"/>
 
         </LinearLayout>
 
@@ -71,6 +71,7 @@
                 android:textColor="@color/colorPrimaryDark" />
 
             <TextView
+                android:id="@+id/githubName"
                 style="@style/normalText"
                 android:text="Ndifreke"
                 android:textColor="@color/colorSecondaryDark" />
@@ -81,6 +82,7 @@
                 android:textColor="@color/colorPrimaryDark" />
 
             <TextView
+                android:id="@+id/githubLink"
                 style="@style/normalText"
                 android:text="http://github.com/link/to/profile"
                 android:textColor="@color/colorSecondaryDark"
