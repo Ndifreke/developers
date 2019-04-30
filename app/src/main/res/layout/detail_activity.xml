@@ -20,7 +20,7 @@
             android:id="@+id/profileToolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/colorPrimary"
+            android:background="@color/primaryColor"
             android:theme="@style/appbarTheme"
             app:layout_constraintEnd_toStartOf="parent"
             app:layout_constraintRight_toRightOf="parent"
@@ -28,9 +28,11 @@
             app:navigationIcon="@drawable/ic_back_button" />
 
         <ImageView
+            android:paddingTop="1dp"
+            android:id="@+id/detailImage"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="2"
+            android:layout_weight="9"
             android:scaleType="centerCrop"
             android:src="@drawable/ic_profile" />
 
@@ -45,7 +47,7 @@
                 style="@style/headerText"
                 android:layout_weight="1"
                 android:text="@string/github_information"
-                android:textColor="@color/colorPrimaryDark"
+                android:textColor="@color/primaryDarkColor"
                 android:textSize="24sp"
                 android:textStyle="bold" />
 
@@ -68,24 +70,24 @@
             <TextView
                 style="@style/titleText"
                 android:text="Name"
-                android:textColor="@color/colorPrimaryDark" />
+                android:textColor="@color/primaryDarkColor" />
 
             <TextView
-                android:id="@+id/githubName"
+                android:id="@+id/detailGithubName"
                 style="@style/normalText"
                 android:text="Ndifreke"
-                android:textColor="@color/colorSecondaryDark" />
+                android:textColor="@color/secondaryDarkColor" />
 
             <TextView
                 style="@style/titleText"
                 android:text="Profile Link"
-                android:textColor="@color/colorPrimaryDark" />
+                android:textColor="@color/primaryDarkColor" />
 
             <TextView
-                android:id="@+id/githubLink"
+                android:id="@+id/detailGithubLink"
                 style="@style/normalText"
                 android:text="http://github.com/link/to/profile"
-                android:textColor="@color/colorSecondaryDark"
+                android:textColor="@color/secondaryDarkColor"
                 android:textFontWeight="1" />
         </LinearLayout>
 
