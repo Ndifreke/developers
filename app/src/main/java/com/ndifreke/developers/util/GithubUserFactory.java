@@ -1,6 +1,4 @@
-package com.ndifreke.developers;
-
-import android.util.Log;
+package com.ndifreke.developers.util;
 
 import com.ndifreke.developers.model.GithubUser;
 
@@ -9,17 +7,18 @@ import org.json.*;
 import java.util.Map;
 import java.util.HashMap;
 
-public class GithubUsersFactory {
+public class GithubUserFactory {
 
-    private Map<String, GithubUser> developers = new HashMap<String, GithubUser>();
+    private static Map<String, GithubUser> developers = new HashMap<String, GithubUser>();
 
-    private GithubUsersFactory(String json) {
-
-        try {
-            JSONObject developer = new JSONObject(json);
-            buildDevelopers(developer.getJSONArray("items"));
-        } catch (JSONException e) {
-            e.printStackTrace();
+    private GithubUserFactory(String json) {
+        if (json != null) {
+            try {
+                JSONObject developer = new JSONObject(json);
+                buildDevelopers(developer.getJSONArray("items"));
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
         }
     }
 
@@ -39,12 +38,17 @@ public class GithubUsersFactory {
         }
     }
 
-    public static GithubUsersFactory createDevelopers(String json) {
-        return new GithubUsersFactory(json);
+    public static GithubUserFactory createUsers(String json) {
+        return new GithubUserFactory(json);
     }
 
-    public Map<String, GithubUser> getDevelopers() {
-        return this.developers;
+    public static Map<String, GithubUser> getUsers() {
+        return developers;
     }
+
+    public static GithubUser fetchAUser(String name){
+        return developers.get(name);
+    }
+
 }
 

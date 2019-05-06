@@ -1,35 +1,34 @@
 package com.ndifreke.developers.view;
 
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.text.Html;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.ndifreke.developers.util.GithubUserFactory;
 import com.ndifreke.developers.R;
 import com.ndifreke.developers.dialog.ProfileShareDialog;
 import com.ndifreke.developers.model.GithubUser;
 
-public class DeveloperProfileActivity extends AppCompatActivity {
+public class DetailActivity extends AppCompatActivity {
     private GithubUser githubUser;
     private ProfileShareDialog dialog;
 
     @Override
     protected void onCreate(Bundle savedInstance) {
         super.onCreate(savedInstance);
-        setContentView(R.layout.profile_activity);
+        setContentView(R.layout.detail_activity);
         this.initToolbar();
         Intent intent = getIntent();
-        Parcelable parcelable
-                = intent.getParcelableExtra("com.ndifreke.developers.model.GithubUser");
-        this.githubUser = (GithubUser) parcelable;
+
+        String username
+                = intent.getStringExtra(GithubUser.USER);
+
+        this.githubUser = GithubUserFactory.fetchAUser(username);
         this.setViewContent(githubUser);
     }
 
@@ -44,10 +43,12 @@ public class DeveloperProfileActivity extends AppCompatActivity {
     }
 
     public void setViewContent(GithubUser githubUser) {
-        TextView name = findViewById(R.id.githubName);
+        TextView name = findViewById(R.id.detailGithubName);
         name.setText(githubUser.getName());
-        TextView profileLink = findViewById(R.id.githubLink);
-        profileLink.setText(githubUser.getAvatarURL());
+        TextView profileLink = findViewById(R.id.detailGithubLink);
+        ImageView avatar = findViewById(R.id.detailImage);
+        avatar.setImageBitmap(githubUser.getImageResource());
+        profileLink.setText(githubUser.getProfileURL());
     }
 
     public void openShareDialog(View view) {

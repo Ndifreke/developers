@@ -1,12 +1,13 @@
 <resources>
 
 <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
-    <item name="colorPrimary">@color/colorPrimary</item>
-    <item name="colorPrimaryDark">@color/colorPrimary</item>
+    <item name="colorPrimary">@color/primaryColor</item>
+    <item name="android:textColorPrimary">@color/primaryLightColor</item>
+    <item name="colorPrimaryDark">@color/primaryColor</item>
 </style>
 
     <style name="appbarTheme">
-        <item name="android:textColorPrimary">@color/colorLight</item>
+        <item name="android:textColorPrimary">@color/secondaryLightColor</item>
     </style>
 
     <style name="normalText" parent="android:TextAppearance">

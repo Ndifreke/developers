@@ -1,56 +1,59 @@
 
 package com.ndifreke.developers.model;
-import android.os.Parcel;
-import android.os.Parcelable;
-import android.util.Log;
 
-import com.ndifreke.developers.R;
-import com.ndifreke.developers.adapter.viewholder.DeveloperViewHolder;
+import android.graphics.Bitmap;
+import android.os.AsyncTask;
+
+import com.ndifreke.developers.util.GithubCacheHelper;
 
 import java.util.Map;
+import java.util.concurrent.atomic.AtomicBoolean;
 
-public class GithubUser implements Parcelable {
+public class GithubUser  {
 
-    private String name = "developerName", avatar = "image URL", profileURL;
+    private volatile AtomicBoolean avatarRequestInFlight = new AtomicBoolean(false);
+    public static final String USER = "com.ndifreke.developers.model.GithubUser";
+    private String name, avatarURL, profileURL;
+    private Bitmap avatar;
+    private GithubUserListener githubListener;
 
     public GithubUser(Map<String, String> developerInformation) {
+
         try {
             name = developerInformation.get("name");
-            avatar = developerInformation.get("avatar");
+            avatarURL = developerInformation.get("avatar");
             profileURL = developerInformation.get("profileURL");
         } catch (NullPointerException e) {
             e.printStackTrace();
         }
     }
 
-    protected GithubUser(Parcel in) {
-        name = in.readString();
-        avatar = in.readString();
-        profileURL = in.readString();
+    public GithubUser getDeveloper() {
+        return this;
     }
-
-    public static final Creator<GithubUser> CREATOR = new Creator<GithubUser>() {
-        @Override
-        public GithubUser createFromParcel(Parcel in) {
-            return new GithubUser(in);
-        }
-
-        @Override
-        public GithubUser[] newArray(int size) {
-            return new GithubUser[size];
-        }
-    };
 
     public String getName() {
         return this.name;
     }
 
-    public String getProfileURL(){
+    public String getProfileURL() {
         return this.profileURL;
     }
 
     public String getAvatarURL() {
-        return this.avatar;
+        return this.avatarURL;
+    }
+
+    /**
+     * Make a network request to fetch the this users image
+     * if there is a request in progress to fetch an image,
+     * this method will ignore subsequent call until the request is completed
+     * before it can accept calls to fetch image
+     */
+    private void fetchImage() {
+        if (avatar == null && !avatarRequestInFlight.get()) {
+            new AsyncLoadImage().execute(this.getAvatarURL());
+        }
     }
 
     /**
@@ -60,27 +63,49 @@ public class GithubUser implements Parcelable {
      * @return Drawable
      */
 
-    public int getImageResource() {
+    public Bitmap getImageResource() {
         /*look in cache, if image does not exist, load a new one
-        update(viewHolder);
+        setListener(viewHolder);
          * This is a stub
          * */
-        return R.drawable.ic_small_profile;
+        fetchImage();
+        return this.avatar;
     }
 
-    public void update(DeveloperViewHolder viewHolder){
-        viewHolder.setDeveloper(this);
+    /**
+     * Adds a @GithubUserListener who subscibes to changes
+     * on this Github user. The GithubListener will receive updates
+     * from notifyUpdate() method defined by this class
+     * notifyUpdate() is called on first time this method is called
+     * and every subsequent time the Github user changes
+     *
+     * @param listener A class who implements @GithubUserListener
+     */
+    public void setListener(GithubUserListener listener) {
+        this.githubListener = listener;
+        notifyListenerOnUpdate();
     }
 
-    @Override
-    public int describeContents() {
-        return 0;
+    private void notifyListenerOnUpdate() {
+        if (this.githubListener != null)
+            this.githubListener.notifyUpdate(this);
     }
 
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(this.getName());
-        dest.writeString(this.getAvatarURL());
-        dest.writeString(this.getProfileURL());
+    public class AsyncLoadImage extends AsyncTask<String, Void, Bitmap> {
+
+        @Override
+        protected synchronized Bitmap doInBackground(String... avaUrls) {
+            avatarRequestInFlight.set(true);
+            return new GithubCacheHelper(GithubUser.this).requestAvatar();
+        }
+
+        @Override
+        protected synchronized void onPostExecute(Bitmap bitmap) {
+            if (bitmap != null) {
+                avatar = bitmap;
+                notifyListenerOnUpdate();
+            }
+            avatarRequestInFlight.set(false);
+        }
     }
 }
