@@ -1,20 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+
+<!--<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"-->
+    <!--xmlns:app="http://schemas.android.com/apk/res-auto"-->
+    <!--xmlns:tools="http://schemas.android.com/tools"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent"-->
+    <!--android:theme="@style/appbarTheme">-->
+
+<LinearLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:theme="@style/appbarTheme">
-
-    <LinearLayout
-        android:id="@+id/linearLayout"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+    android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:theme="@style/appbarTheme"
+    >
 
         <android.support.v7.widget.Toolbar
             android:id="@+id/profileToolbar"
@@ -22,50 +24,48 @@
             android:layout_height="wrap_content"
             android:background="@color/primaryColor"
             android:theme="@style/appbarTheme"
-            app:layout_constraintEnd_toStartOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
             app:navigationIcon="@drawable/ic_back_button" />
 
         <ImageView
+            android:layout_below="@+id/profileToolbar"
             android:paddingTop="1dp"
             android:id="@+id/detailImage"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="9"
             android:scaleType="centerCrop"
-            android:src="@drawable/ic_profile" />
+            android:layout_weight="2"
+            android:src="@drawable/ic_profile"
+            android:onClick="toggleToolBar"/>
+
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:orientation="horizontal"
-            android:padding="16dp">
-
-            <TextView
-                style="@style/headerText"
-                android:layout_weight="1"
-                android:text="@string/github_information"
-                android:textColor="@color/primaryDarkColor"
-                android:textSize="24sp"
-                android:textStyle="bold" />
-
-            <ImageView
-                style="@style/actionIcon"
-                android:contentDescription="@string/share_icon"
-                android:src="@drawable/ic_share"
-                android:onClick="openShareDialog"/>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:layout_weight="1"
             android:orientation="vertical"
             android:padding="16dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                style="@style/titleText"
+              >
+                <TextView
+                    style="@style/headerText"
+                    android:layout_weight="1"
+                    android:text="@string/github_information"
+                    android:textColor="@color/primaryDarkColor"
+                    android:textSize="24sp"
+                    android:textStyle="bold" />
+
+                <ImageView
+                    style="@style/actionIcon"
+                    android:contentDescription="@string/share_icon"
+                    android:src="@drawable/ic_share"
+                    android:onClick="openShareDialog"/>
+
+            </LinearLayout>
 
             <TextView
                 style="@style/titleText"
@@ -80,7 +80,18 @@
 
             <TextView
                 style="@style/titleText"
-                android:text="Profile Link"
+                android:text="Organization"
+                android:textColor="@color/primaryDarkColor" />
+
+            <TextView
+                android:id="@+id/githubNameOrganization"
+                style="@style/normalText"
+                android:text="None"
+                android:textColor="@color/secondaryDarkColor" />
+
+            <TextView
+                style="@style/titleText"
+                android:text="@string/github_url"
                 android:textColor="@color/primaryDarkColor" />
 
             <TextView
@@ -89,8 +100,9 @@
                 android:text="http://github.com/link/to/profile"
                 android:textColor="@color/secondaryDarkColor"
                 android:textFontWeight="1" />
-        </LinearLayout>
 
     </LinearLayout>
 
-</android.support.constraint.ConstraintLayout>
+</LinearLayout>
+
+<!--</ScrollView>-->

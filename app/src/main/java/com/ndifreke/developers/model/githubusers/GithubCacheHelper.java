@@ -1,31 +1,46 @@
-package com.ndifreke.developers.util;
+package com.ndifreke.developers.model.githubusers;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 
 import com.ndifreke.developers.GlobalContext;
 import com.ndifreke.developers.R;
-import com.ndifreke.developers.model.GithubUser;
+import com.ndifreke.developers.adapter.viewholder.DeveloperViewHolder;
 
 import java.io.File;
 import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.Arrays;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
+import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.RecyclerView.Adapter;
 import android.util.Log;
 
 /**
  * Writes and Read a Github user data from the disk,
  */
-public class GithubCacheHelper extends GlobalContext {
+public class GithubCacheHelper /* extends GlobalContext */{
+
+    public static Map<String, GithubUser> cachedGithubUsers  = new HashMap<>();
+    public static Adapter cachedGithubUserAdapter = null;
 
     private GithubUser user;
     private HttpURLConnection httpURLConnection;
 
     public GithubCacheHelper(GithubUser user) {
         this.user = user;
+    }
+
+    protected void bindInstance(GithubUser user){
+        this.user = user;
+    }
+
+    public GithubCacheHelper(){
     }
 
     /**
@@ -58,8 +73,8 @@ public class GithubCacheHelper extends GlobalContext {
     public Bitmap requestAvatar() {
         Bitmap bitmap = null;
         try {
-            Log.i("avaterURL", user.getAvatarURL()+" avater for " + user.getName());
-            httpURLConnection = (HttpURLConnection) new URL(this.user.getAvatarURL())
+            Log.i("avaterURL", user.getImageURL()+" avater for " + user.getUsername());
+            httpURLConnection = (HttpURLConnection) new URL(this.user.getImageURL())
                     .openConnection();
             bitmap = BitmapFactory.decodeStream(httpURLConnection.getInputStream());
         } catch (MalformedURLException ignored) {
@@ -70,8 +85,8 @@ public class GithubCacheHelper extends GlobalContext {
     }
 
     public boolean saveAvatar() {
-        File f = globalContext.getCacheDir();
-        Log.i("cachex", f.getAbsolutePath());
+      //  File f = globalContext.getCacheDir();
+        //Log.i("cachex", f.getAbsolutePath());
         return false;
     }
 

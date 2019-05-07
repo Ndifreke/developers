@@ -1,7 +1,5 @@
 package com.ndifreke.developers.dialog;
 
-import com.ndifreke.developers.model.GithubUser;
-
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.os.Bundle;
@@ -9,6 +7,7 @@ import android.support.v7.app.AppCompatDialogFragment;
 import android.view.View;
 import android.widget.TextView;
 import com.ndifreke.developers.R;
+import com.ndifreke.developers.model.githubusers.GithubUser;
 
 
 public class ProfileShareDialog extends AppCompatDialogFragment {
@@ -33,7 +32,7 @@ public class ProfileShareDialog extends AppCompatDialogFragment {
         TextView githubName = dialogLayout.findViewById(R.id.share_github_name);
         TextView githubURL = dialogLayout.findViewById(R.id.share_github_url);
         final TextView closeDialog = dialogLayout.findViewById(R.id.closeButton);
-        githubName.setText("@".concat(this.githubUser.getName()));
+        githubName.setText("@".concat(this.githubUser.getUsername()));
         githubURL.setText(this.githubUser.getProfileURL());
         dialog.setView(dialogLayout);
         return dialog.create();

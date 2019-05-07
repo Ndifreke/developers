@@ -1,4 +1,4 @@
-package com.ndifreke.developers.model;
+package com.ndifreke.developers.model.githubusers;
 
 /**
  * GithubUserListener provides an Interface for
@@ -15,4 +15,5 @@ public interface GithubUserListener {
      * @param user the @GithubUser that is updated
      */
     void notifyUpdate(GithubUser user);
+
 }

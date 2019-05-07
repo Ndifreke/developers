@@ -8,15 +8,17 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-
-import com.ndifreke.developers.util.GithubUserFactory;
 import com.ndifreke.developers.R;
 import com.ndifreke.developers.dialog.ProfileShareDialog;
-import com.ndifreke.developers.model.GithubUser;
+import com.ndifreke.developers.model.githubusers.GithubCacheHelper;
+import com.ndifreke.developers.model.githubusers.GithubUser;
+import com.ndifreke.developers.model.githubusers.GithubUserListener;
 
 public class DetailActivity extends AppCompatActivity {
     private GithubUser githubUser;
     private ProfileShareDialog dialog;
+    private boolean isVisible = true;
+    private ActionBar actionBar;
 
     @Override
     protected void onCreate(Bundle savedInstance) {
@@ -25,17 +27,25 @@ public class DetailActivity extends AppCompatActivity {
         this.initToolbar();
         Intent intent = getIntent();
 
-        String username
-                = intent.getStringExtra(GithubUser.USER);
+        String profileID
+                = intent.getStringExtra(GithubUser.ID);
 
-        this.githubUser = GithubUserFactory.fetchAUser(username);
+        this.githubUser = GithubCacheHelper.cachedGithubUsers.get(profileID);
+        githubUser.setListener(new GithubUserListener() {
+            @Override
+            public void notifyUpdate(GithubUser user) {
+                setViewContent(user);
+            }
+        });
+
+        githubUser.requestUpate();
         this.setViewContent(githubUser);
     }
 
     public void initToolbar() {
         Toolbar toolbar = findViewById(R.id.profileToolbar);
         setSupportActionBar(toolbar);
-        ActionBar actionBar = getSupportActionBar();
+         actionBar = getSupportActionBar();
         if (actionBar != null) {
             actionBar.setTitle(getResources().getString(R.string.PROFILE_TITLE));
             actionBar.setDisplayHomeAsUpEnabled(true);
@@ -44,11 +54,13 @@ public class DetailActivity extends AppCompatActivity {
 
     public void setViewContent(GithubUser githubUser) {
         TextView name = findViewById(R.id.detailGithubName);
-        name.setText(githubUser.getName());
+        name.setText(githubUser.getUsername());
         TextView profileLink = findViewById(R.id.detailGithubLink);
         ImageView avatar = findViewById(R.id.detailImage);
         avatar.setImageBitmap(githubUser.getImageResource());
         profileLink.setText(githubUser.getProfileURL());
+        TextView oranizationView = findViewById(R.id.githubNameOrganization);
+        oranizationView.setText(githubUser.getCompany());
     }
 
     public void openShareDialog(View view) {
@@ -62,8 +74,18 @@ public class DetailActivity extends AppCompatActivity {
         intent.putExtra(Intent.EXTRA_TITLE, "Checkout this Awesome developer");
         intent.putExtra(Intent.EXTRA_TEXT,
                 String.format("checkout this awesome developer @%1s",
-                        githubUser.getName()));
+                        githubUser.getUsername()));
         startActivity(intent);
+    }
+
+    public void toggleToolBar(View view){
+        if(isVisible){
+            actionBar.hide();
+            isVisible = false;
+        }else{
+            actionBar.show();
+            isVisible = true;
+        }
     }
 
     public void dismisDialog(View view) {

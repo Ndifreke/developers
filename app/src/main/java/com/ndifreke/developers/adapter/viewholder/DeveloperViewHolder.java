@@ -9,8 +9,8 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.ndifreke.developers.model.GithubUser;
 import com.ndifreke.developers.R;
+import com.ndifreke.developers.model.githubusers.GithubUser;
 import com.ndifreke.developers.view.DetailActivity;
 
 public class DeveloperViewHolder extends RecyclerView.ViewHolder{
@@ -29,16 +29,15 @@ public class DeveloperViewHolder extends RecyclerView.ViewHolder{
     }
 
     public void setDeveloper(final GithubUser developer){
-        this.setName(developer.getName());
+        this.setName(developer.getUsername());
         this.setImage(developer.getImageResource());
-        GithubUser developer1 = developer;
 
         viewHolder.setOnClickListener(
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         Intent intent = new Intent(context, DetailActivity.class);
-                        intent.putExtra(GithubUser.USER, developer.getName());
+                        intent.putExtra(GithubUser.ID, developer.getProfileURL());
                         context.startActivity(intent);
                     }
                 });
