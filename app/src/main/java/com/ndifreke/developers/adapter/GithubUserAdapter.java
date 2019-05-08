@@ -5,16 +5,15 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
-import com.ndifreke.developers.model.GithubUser;
 import com.ndifreke.developers.R;
 import java.util.List;
 
 import android.widget.RelativeLayout;
-import java.util.Map;
-import com.ndifreke.developers.adapter.viewholder.DeveloperViewHolder;
-import com.ndifreke.developers.model.GithubUserListener;
 
-import java.util.LinkedList;
+import com.ndifreke.developers.adapter.viewholder.DeveloperViewHolder;
+import com.ndifreke.developers.model.githubusers.GithubCacheHelper;
+import com.ndifreke.developers.model.githubusers.GithubUserListener;
+import com.ndifreke.developers.model.githubusers.GithubUser;
 
 public class GithubUserAdapter extends RecyclerView.Adapter<DeveloperViewHolder> implements GithubUserListener {
 
@@ -28,16 +27,13 @@ public class GithubUserAdapter extends RecyclerView.Adapter<DeveloperViewHolder>
      * which will be used as dataset in the recycler views
      * @param users Map of GithubUsers
      */
-    public void setDataSet(Map<String, GithubUser> users){
-        this.createGithubUserList(users);
-        for(GithubUser user : this.developerList){
-            user.setListener(this);
+    public void setDataSet(List<GithubUser> users){
+        developerList = users;
+        for(GithubUser user : users){
+           user.setListener(this);
+            GithubCacheHelper.cachedGithubUsers.put(user.getProfileURL(), user);
         }
-    }
-
-    private void createGithubUserList(Map<String, GithubUser> users){
-        List<GithubUser> userList = new LinkedList<>(users.values());
-        this.developerList = userList;
+        Log.i("xxx", users.get(0).getUsername());
     }
 
     @Override
@@ -59,7 +55,6 @@ public class GithubUserAdapter extends RecyclerView.Adapter<DeveloperViewHolder>
 
     @Override
     public int getItemCount() {
-//        Log.i("avater", "checking list");
         return developerList == null ? 0 : developerList.size();
     }
 }

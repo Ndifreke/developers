@@ -7,4 +7,5 @@
     <string name="PROFILE_TITLE">Profile Detail</string>
     <string name="profile_share_dialog_title">Checkout this Awesome Developer</string>
     <string name="dialog_close">Close</string>
+    <string name="github_url">Github Link</string>
 </resources>

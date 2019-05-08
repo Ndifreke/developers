@@ -1,18 +1,29 @@
 package com.ndifreke.developers.view;
 
-import android.content.Context;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
 import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView.Adapter;
 import android.support.v7.widget.Toolbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 
 import com.ndifreke.developers.R;
 import com.ndifreke.developers.adapter.GithubUserAdapter;
-import com.ndifreke.developers.api.GithubAPIs;
+import com.ndifreke.developers.api.GithubAPI;
+import com.ndifreke.developers.model.githubusers.GithubCacheHelper;
+import com.ndifreke.developers.model.githubusers.GithubUser;
+import com.ndifreke.developers.model.githubusers.GithubUserFragment;
+import com.ndifreke.developers.model.githubusers.GithubUserResponse;
+
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 public class MainActivity extends AppCompatActivity {
     GithubUserAdapter devListAdapter;
@@ -29,26 +40,45 @@ public class MainActivity extends AppCompatActivity {
             actionBar.setDisplayHomeAsUpEnabled(true);
             actionBar.setTitle("Nairobi Developers");
         }
-        fetchDevelopersAsync();
-    }
-
-    public void initRecycler(RecyclerView.Adapter adapter) {
-        RecyclerView recyclerView = findViewById(R.id.developerListRecycler);
-        recyclerView.setHasFixedSize(true);
-        recyclerView.setAdapter(adapter);
-        recyclerView.setLayoutManager(new LinearLayoutManager(MainActivity.this));
-    }
-
-    private void fetchDevelopersAsync(){
-        ConnectivityManager connMgr = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
-        if(connMgr != null) {
-            NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
-            if(networkInfo.isConnected()){
-                new GithubAPIs(this).execute();
-            }
+        boolean hasCachedAdapter = GithubCacheHelper.cachedGithubUserAdapter != null;
+        if(GithubCacheHelper.cachedGithubUsers.size() > 0 && hasCachedAdapter ){
+            initRecycler(GithubCacheHelper.cachedGithubUserAdapter);
+        }else {
+            fetchDevelopers();
         }
     }
 
+    public void initRecycler(Adapter adapter) {
+        RecyclerView recycler = findViewById(R.id.developerListRecycler);
+        recycler.setHasFixedSize(true);
+        recycler.setAdapter(adapter);
+        recycler.setLayoutManager(new LinearLayoutManager(MainActivity.this));
+    }
 
+    private void fetchDevelopers() {
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl("https://api.github.com")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
 
+        GithubAPI githubUserApiRetrofit = retrofit.create(GithubAPI.class);
+        Call<GithubUserResponse> call = githubUserApiRetrofit.getUsers();
+        call.enqueue(new Callback<GithubUserResponse>() {
+
+            @Override
+            public void onResponse(Call<GithubUserResponse> call, Response<GithubUserResponse> response) {
+                List<GithubUser> devepers  = response.body().getDevlopers();
+                GithubUserAdapter adapter = new GithubUserAdapter();
+                adapter.setDataSet(devepers);
+                GithubCacheHelper.cachedGithubUserAdapter = adapter;
+                initRecycler(adapter);
+            }
+
+            @Override
+            public void onFailure(Call<GithubUserResponse> call, Throwable t) {
+                t.printStackTrace();
+                Log.i("xxx", t.getMessage());
+            }
+        });
+    }
 }
