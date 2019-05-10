@@ -26,7 +26,6 @@ public class GithubUserFragment {
     private AtomicBoolean fragmentRequestStatus = new AtomicBoolean(false);
 
     public GithubUserFragment() {
-        //  requestUpdate();
     }
 
     public void registerGithubUser(GithubUser githubUser) {

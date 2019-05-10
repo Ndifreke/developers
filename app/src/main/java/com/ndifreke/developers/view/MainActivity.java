@@ -1,23 +1,23 @@
 package com.ndifreke.developers.view;
 
-import android.support.v7.widget.LinearLayoutManager;
+import android.support.v4.util.Consumer;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView.Adapter;
 import android.support.v7.widget.Toolbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 
 import com.ndifreke.developers.R;
 import com.ndifreke.developers.adapter.GithubUserAdapter;
 import com.ndifreke.developers.api.GithubAPI;
 import com.ndifreke.developers.model.githubusers.GithubCacheHelper;
 import com.ndifreke.developers.model.githubusers.GithubUser;
-import com.ndifreke.developers.model.githubusers.GithubUserFragment;
 import com.ndifreke.developers.model.githubusers.GithubUserResponse;
 
 import java.util.List;
+import java.util.Map;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -52,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
         RecyclerView recycler = findViewById(R.id.developerListRecycler);
         recycler.setHasFixedSize(true);
         recycler.setAdapter(adapter);
-        recycler.setLayoutManager(new LinearLayoutManager(MainActivity.this));
+        recycler.setLayoutManager(new GridLayoutManager(MainActivity.this,2));
     }
 
     private void fetchDevelopers() {
@@ -68,16 +68,15 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<GithubUserResponse> call, Response<GithubUserResponse> response) {
                 List<GithubUser> devepers  = response.body().getDevlopers();
-                GithubUserAdapter adapter = new GithubUserAdapter();
-                adapter.setDataSet(devepers);
-                GithubCacheHelper.cachedGithubUserAdapter = adapter;
-                initRecycler(adapter);
+                devListAdapter = new GithubUserAdapter();
+                devListAdapter.setDataSet(devepers);
+                GithubCacheHelper.cachedGithubUserAdapter = devListAdapter;
+                initRecycler(devListAdapter);
             }
 
             @Override
             public void onFailure(Call<GithubUserResponse> call, Throwable t) {
                 t.printStackTrace();
-                Log.i("xxx", t.getMessage());
             }
         });
     }

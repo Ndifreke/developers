@@ -28,8 +28,8 @@ public class GithubCacheHelper /* extends GlobalContext */{
 
     public static Map<String, GithubUser> cachedGithubUsers  = new HashMap<>();
     public static Adapter cachedGithubUserAdapter = null;
-
     private GithubUser user;
+
     private HttpURLConnection httpURLConnection;
 
     public GithubCacheHelper(GithubUser user) {

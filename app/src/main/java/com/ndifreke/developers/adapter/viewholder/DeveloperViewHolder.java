@@ -48,6 +48,7 @@ public class DeveloperViewHolder extends RecyclerView.ViewHolder{
     }
 
     private void setImage(Bitmap image){
+        if(image != null)
             this.avatarView.setImageBitmap(image);
     }
 
