@@ -19,11 +19,11 @@ Adobe XD is a vector based design tool developed by Adobe INC, I used Adobe XD f
 design because it is lightweight, fast, responsive and have a clean UI that enhances productivity.
 
 ## Screenshot
+#### Github Developers List
+<img width="360" height="650" src="https://user-images.githubusercontent.com/12186332/57527643-1c2b5a00-7328-11e9-85cf-22d301758a5f.png">
 
+#### Github Developers Profile
+<img width="360" height="650" src="https://user-images.githubusercontent.com/12186332/57527644-1cc3f080-7328-11e9-889a-ea98e46e69f9.png">
 
-![Profile](https://storage.googleapis.com/design_work/wireframe/profile%20list.png)
-
-![Developers List](https://storage.googleapis.com/design_work/wireframe/profile.png)
-
-![Share intent](https://storage.googleapis.com/design_work/wireframe/share%20dialogue.png)
-
+#### Share Dialog
+<img width="360" height="650" src="https://user-images.githubusercontent.com/12186332/57527645-1d5c8700-7328-11e9-85dc-c50a3b08bf56.png">
