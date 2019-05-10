@@ -1,10 +1,16 @@
 package com.ndifreke.developers.model.githubusers;
 
+import android.content.res.Resources;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.util.Log;
 
 import com.google.gson.annotations.SerializedName;
+import com.ndifreke.developers.GlobalContext;
+import com.ndifreke.developers.R;
+import com.ndifreke.developers.api.ApiExecutor;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicBoolean;
@@ -34,7 +40,8 @@ public class GithubUser {
 
     private List<GithubUserListener> githubListeners = new ArrayList<>();
     private volatile AtomicBoolean avatarRequestInFlight = new AtomicBoolean(false);
-    private Bitmap image;
+
+    private Bitmap image = null;
 
     public GithubUser() {
         //call requestUpdate();here if you want
@@ -103,7 +110,8 @@ public class GithubUser {
      */
     private void fetchImage() {
         if (image == null && !avatarRequestInFlight.get()) {
-            new AsyncLoadImage().execute(this.getImageURL());
+//            new AsyncLoadImage().execute(this.getImageURL());
+            ApiExecutor.execute(getGithubImageRunnable());
         }
     }
 
@@ -118,7 +126,6 @@ public class GithubUser {
      */
     public void setListener(GithubUserListener listener) {
         this.githubListeners.add(listener);
-        // notifyListenerOnUpdate();
     }
 
     private void notifyListenerOnUpdate() {
@@ -127,22 +134,22 @@ public class GithubUser {
             listener.notifyUpdate(this);
     }
 
-    public class AsyncLoadImage extends AsyncTask<String, Void, Bitmap> {
+    private Thread imageDownloadThread;
 
-        @Override
-        protected synchronized Bitmap doInBackground(String... avaUrls) {
-            avatarRequestInFlight.set(true);
-            return new GithubCacheHelper(GithubUser.this).requestAvatar();
-        }
+    public Thread getImageLoadThread(){
+        return imageDownloadThread;
+    }
 
-        @Override
-        protected synchronized void onPostExecute(Bitmap bitmap) {
-            if (bitmap != null) {
-                image = bitmap;
-                notifyListenerOnUpdate();
+    public Runnable getGithubImageRunnable(){
+      return  new Runnable(){
+            @Override
+            public void run(){
+                imageDownloadThread = Thread.currentThread();
+             Bitmap bitmap =  new  GithubCacheHelper(GithubUser.this).requestAvatar();
+             image = bitmap;
+             notifyListenerOnUpdate();
             }
-            avatarRequestInFlight.set(false);
-        }
+        };
     }
 
 }

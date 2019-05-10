@@ -1,7 +1,10 @@
 package com.ndifreke.developers.view;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -13,6 +16,7 @@ import com.ndifreke.developers.dialog.ProfileShareDialog;
 import com.ndifreke.developers.model.githubusers.GithubCacheHelper;
 import com.ndifreke.developers.model.githubusers.GithubUser;
 import com.ndifreke.developers.model.githubusers.GithubUserListener;
+import android.support.v7.graphics.Palette;
 
 public class DetailActivity extends AppCompatActivity {
     private GithubUser githubUser;
@@ -58,9 +62,10 @@ public class DetailActivity extends AppCompatActivity {
         TextView profileLink = findViewById(R.id.detailGithubLink);
         ImageView avatar = findViewById(R.id.detailImage);
         avatar.setImageBitmap(githubUser.getImageResource());
+        toolBarColorFromPalette(githubUser.getImageResource()); //
         profileLink.setText(githubUser.getProfileURL());
-        TextView oranizationView = findViewById(R.id.githubNameOrganization);
-        oranizationView.setText(githubUser.getCompany());
+        TextView organizationView = findViewById(R.id.githubNameOrganization);
+        organizationView.setText(githubUser.getCompany());
     }
 
     public void openShareDialog(View view) {
@@ -88,7 +93,14 @@ public class DetailActivity extends AppCompatActivity {
         }
     }
 
-    public void dismisDialog(View view) {
-        this.dialog.dismiss();
+    public void toolBarColorFromPalette(Bitmap profileImage){
+      Palette.from(profileImage).generate(new Palette.PaletteAsyncListener() {
+            @Override
+            public void onGenerated(@Nullable Palette palette) {
+                int rgb = palette.getDominantSwatch().getRgb();
+                actionBar.setBackgroundDrawable(new ColorDrawable(rgb));
+            }
+        });
+
     }
 }
