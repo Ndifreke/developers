@@ -1,4 +1,4 @@
-package com.ndifreke.developers.model.githubusers;
+package com.ndifreke.developers.features.githubusers;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.List;

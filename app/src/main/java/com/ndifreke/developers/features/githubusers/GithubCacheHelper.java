@@ -1,23 +1,17 @@
-package com.ndifreke.developers.model.githubusers;
+package com.ndifreke.developers.features.githubusers;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 
-import com.ndifreke.developers.GlobalContext;
 import com.ndifreke.developers.R;
-import com.ndifreke.developers.adapter.viewholder.DeveloperViewHolder;
 
-import java.io.File;
 import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
-import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.RecyclerView.Adapter;
 import android.util.Log;
 
@@ -26,8 +20,6 @@ import android.util.Log;
  */
 public class GithubCacheHelper /* extends GlobalContext */{
 
-    public static Map<String, GithubUser> cachedGithubUsers  = new HashMap<>();
-    public static Adapter cachedGithubUserAdapter = null;
     private GithubUser user;
 
     private HttpURLConnection httpURLConnection;
