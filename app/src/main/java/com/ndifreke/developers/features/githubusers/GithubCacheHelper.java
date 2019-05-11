@@ -65,14 +65,13 @@ public class GithubCacheHelper /* extends GlobalContext */{
     public Bitmap requestAvatar() {
         Bitmap bitmap = null;
         try {
-            Log.i("avaterURL", user.getImageURL()+" avater for " + user.getUsername());
             httpURLConnection = (HttpURLConnection) new URL(this.user.getImageURL())
                     .openConnection();
             bitmap = BitmapFactory.decodeStream(httpURLConnection.getInputStream());
+            httpURLConnection.disconnect();
         } catch (MalformedURLException ignored) {
         } catch (IOException ignored) {
         }
-        httpURLConnection.disconnect();
         return bitmap;
     }
 
