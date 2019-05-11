@@ -3,9 +3,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:id="@+id/shareDialog"
     android:background="@color/primaryColor"
     android:paddingTop="16dp"
-    android:padding="24dp">
+    android:padding="24dp"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".activities.DetailActivity" >
 
     <TextView
         style="@style/titleText"
@@ -13,48 +16,39 @@
         android:text="@string/profile_share_dialog_title"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:id="@+id/dialogTitile"
+        android:id="@+id/dialogTitle"
         android:layout_marginBottom="24dp"
        />
 
     <TextView
         android:id="@+id/share_github_name"
-        android:layout_below="@+id/dialogTitile"
-        android:layout_alignLeft="@+id/dialogTitile"
+        android:layout_below="@+id/dialogTitle"
+        android:layout_alignLeft="@+id/dialogTitle"
         style="@style/normalText"
         android:textColor="@color/secondaryLightColor"
-        android:layout_alignStart="@+id/dialogTitile" />
+        android:layout_alignStart="@+id/dialogTitle" />
 
     <TextView
         android:id="@+id/share_github_url"
         android:layout_below="@+id/share_github_name"
-        android:layout_alignLeft="@+id/dialogTitile"
+        android:layout_alignLeft="@+id/dialogTitle"
         style="@style/normalText"
         android:autoLink="web"
         android:textColorLink="@color/secondaryColor"
-  />
-
-    <TextView
-        android:id="@+id/closeButton"
-        android:layout_below="@+id/share_github_url"
-        android:layout_alignRight="@+id/dialogTitile"
-        android:text="@string/dialog_close"
-        android:textAllCaps="true"
-        style="@style/titleText"
-        android:onClick="dismisDialog"
-        android:textColor="@color/secondaryColor"
-        android:clickable="true"
-        />
+        android:layout_alignStart="@+id/dialogTitle" />
 
     <TextView
         android:id="@+id/shareButton"
         android:layout_below="@+id/share_github_url"
-        android:text="SHARE"
+        android:layout_alignRight="@+id/dialogTitle"
+        android:text="@string/share"
         android:textAllCaps="true"
         style="@style/titleText"
         android:onClick="shareProfile"
         android:textColor="@color/secondaryColor"
         android:clickable="true"
-        />
+        android:focusable="true"
+        android:layout_alignEnd="@+id/dialogTitle" />
+
 
 </RelativeLayout>

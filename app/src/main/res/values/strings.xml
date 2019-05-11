@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">Developers</string>
-    <string name="share_icon">share icon</string>
+    <string name="shareIcon">share icon</string>
     <string name="github_information">Github Information</string>
     <string name="title_activity_profile">ProfileActivity</string>
     <string name="title_activity_main2">Main2Activity</string>
@@ -8,4 +8,5 @@
     <string name="profile_share_dialog_title">Checkout this Awesome Developer</string>
     <string name="dialog_close">Close</string>
     <string name="github_url">Github Link</string>
+    <string name="share">SHARE</string>
 </resources>

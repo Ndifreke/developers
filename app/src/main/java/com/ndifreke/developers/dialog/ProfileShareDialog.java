@@ -19,11 +19,9 @@ public class ProfileShareDialog extends AppCompatDialogFragment {
     public ProfileShareDialog(){
     }
 
-    public ProfileShareDialog(GithubUser githubUser){
-        super();
+    public void setGithubUser(GithubUser githubUser){
         this.githubUser = githubUser;
     }
-
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstance) {
@@ -31,7 +29,6 @@ public class ProfileShareDialog extends AppCompatDialogFragment {
         View dialogLayout = getActivity().getLayoutInflater().inflate(R.layout.profile_share_dialog, null);
         TextView githubName = dialogLayout.findViewById(R.id.share_github_name);
         TextView githubURL = dialogLayout.findViewById(R.id.share_github_url);
-        final TextView closeDialog = dialogLayout.findViewById(R.id.closeButton);
         githubName.setText("@".concat(this.githubUser.getUsername()));
         githubURL.setText(this.githubUser.getProfileURL());
         dialog.setView(dialogLayout);

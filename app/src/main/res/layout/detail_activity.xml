@@ -1,13 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-
-<!--<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"-->
-    <!--xmlns:app="http://schemas.android.com/apk/res-auto"-->
-    <!--xmlns:tools="http://schemas.android.com/tools"-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="match_parent"-->
-    <!--android:theme="@style/appbarTheme">-->
-
 <LinearLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -27,13 +19,13 @@
             app:navigationIcon="@drawable/ic_back_button" />
 
         <ImageView
-            android:layout_below="@+id/profileToolbar"
             android:paddingTop="1dp"
-            android:id="@+id/detailImage"
+            android:id="@+id/detailImageView"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:scaleType="centerCrop"
             android:layout_weight="2"
+            android:background="@drawable/ic_profile"
             android:src="@drawable/ic_profile"
             android:onClick="toggleToolBar"/>
 
@@ -60,8 +52,9 @@
                     android:textStyle="bold" />
 
                 <ImageView
+                    android:id="@+id/shareButton"
                     style="@style/actionIcon"
-                    android:contentDescription="@string/share_icon"
+                    android:contentDescription="@string/shareIcon"
                     android:src="@drawable/ic_share"
                     android:onClick="openShareDialog"/>
 
@@ -104,5 +97,3 @@
     </LinearLayout>
 
 </LinearLayout>
-
-<!--</ScrollView>-->

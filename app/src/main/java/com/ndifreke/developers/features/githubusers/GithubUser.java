@@ -104,7 +104,7 @@ public class GithubUser {
      */
     private void fetchImage() {
         if (image == null && !avatarRequestInFlight.get()) {
-//            new AsyncLoadImage().execute(this.getImageURL());
+            avatarRequestInFlight.set(true);
             ApiExecutor.execute(getGithubImageRunnable());
         }
     }
@@ -141,6 +141,7 @@ public class GithubUser {
                 imageDownloadThread = Thread.currentThread();
              Bitmap bitmap =  new  GithubCacheHelper(GithubUser.this).requestAvatar();
              image = bitmap;
+             avatarRequestInFlight.set(false);
              notifyListenerOnUpdate();
             }
         };
