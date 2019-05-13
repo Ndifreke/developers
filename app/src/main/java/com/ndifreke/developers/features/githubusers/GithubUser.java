@@ -1,14 +1,8 @@
-package com.ndifreke.developers.model.githubusers;
+package com.ndifreke.developers.features.githubusers;
 
-import android.content.res.Resources;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.os.AsyncTask;
-import android.util.Log;
 
 import com.google.gson.annotations.SerializedName;
-import com.ndifreke.developers.GlobalContext;
-import com.ndifreke.developers.R;
 import com.ndifreke.developers.api.ApiExecutor;
 
 import java.util.ArrayList;
@@ -38,7 +32,7 @@ public class GithubUser {
 
     public static final String ID = GithubUser.class.getName();
 
-    private List<GithubUserListener> githubListeners = new ArrayList<>();
+    private List<GithubUserObserver> githubListeners = new ArrayList<>();
     private volatile AtomicBoolean avatarRequestInFlight = new AtomicBoolean(false);
 
     private Bitmap image = null;
@@ -116,22 +110,22 @@ public class GithubUser {
     }
 
     /**
-     * Adds a @GithubUserListener who subscibes to changes
+     * Adds a @GithubUserObserver who subscibes to changes
      * on this Github user. The GithubListener will receive updates
-     * from notifyUpdate() method defined by this class
-     * notifyUpdate() is called on first time this method is called
+     * from notifyObserver() method defined by this class
+     * notifyObserver() is called on first time this method is called
      * and every subsequent time the Github user changes
      *
-     * @param listener A class who implements @GithubUserListener
+     * @param listener A class who implements @GithubUserObserver
      */
-    public void setListener(GithubUserListener listener) {
+    public void setListener(GithubUserObserver listener) {
         this.githubListeners.add(listener);
     }
 
     private void notifyListenerOnUpdate() {
         if (this.githubListeners != null)
-            for(GithubUserListener listener : githubListeners)
-            listener.notifyUpdate(this);
+            for(GithubUserObserver listener : githubListeners)
+            listener.notifyObserver(this);
     }
 
     private Thread imageDownloadThread;

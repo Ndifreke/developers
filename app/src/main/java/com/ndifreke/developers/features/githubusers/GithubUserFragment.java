@@ -1,6 +1,4 @@
-package com.ndifreke.developers.model.githubusers;
-
-import android.util.Log;
+package com.ndifreke.developers.features.githubusers;
 
 import com.google.gson.annotations.SerializedName;
 import com.ndifreke.developers.api.GithubAPI;

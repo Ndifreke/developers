@@ -10,8 +10,8 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.ndifreke.developers.R;
-import com.ndifreke.developers.model.githubusers.GithubUser;
-import com.ndifreke.developers.view.DetailActivity;
+import com.ndifreke.developers.features.githubusers.GithubUser;
+import com.ndifreke.developers.activities.DetailActivity;
 
 public class DeveloperViewHolder extends RecyclerView.ViewHolder{
 

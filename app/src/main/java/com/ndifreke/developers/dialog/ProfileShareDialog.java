@@ -7,7 +7,7 @@ import android.support.v7.app.AppCompatDialogFragment;
 import android.view.View;
 import android.widget.TextView;
 import com.ndifreke.developers.R;
-import com.ndifreke.developers.model.githubusers.GithubUser;
+import com.ndifreke.developers.features.githubusers.GithubUser;
 
 
 public class ProfileShareDialog extends AppCompatDialogFragment {
@@ -36,5 +36,5 @@ public class ProfileShareDialog extends AppCompatDialogFragment {
         githubURL.setText(this.githubUser.getProfileURL());
         dialog.setView(dialogLayout);
         return dialog.create();
-    };
-};
+    }
+}

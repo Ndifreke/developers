@@ -1,4 +1,4 @@
-package com.ndifreke.developers.view;
+package com.ndifreke.developers.activities;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -13,9 +13,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import com.ndifreke.developers.R;
 import com.ndifreke.developers.dialog.ProfileShareDialog;
-import com.ndifreke.developers.model.githubusers.GithubCacheHelper;
-import com.ndifreke.developers.model.githubusers.GithubUser;
-import com.ndifreke.developers.model.githubusers.GithubUserListener;
+import com.ndifreke.developers.features.githubusers.GithubCacheHelper;
+import com.ndifreke.developers.features.githubusers.GithubUser;
+import com.ndifreke.developers.features.githubusers.GithubUserObserver;
 import android.support.v7.graphics.Palette;
 
 public class DetailActivity extends AppCompatActivity {
@@ -34,10 +34,10 @@ public class DetailActivity extends AppCompatActivity {
         String profileID
                 = intent.getStringExtra(GithubUser.ID);
 
-        this.githubUser = GithubCacheHelper.cachedGithubUsers.get(profileID);
-        githubUser.setListener(new GithubUserListener() {
+        this.githubUser = GlobalContext.cachedUsers.get(profileID);
+        githubUser.setListener(new GithubUserObserver<GithubUser>() {
             @Override
-            public void notifyUpdate(GithubUser user) {
+            public void notifyObserver(GithubUser user) {
                 setViewContent(user);
             }
         });
