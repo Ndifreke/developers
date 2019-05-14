@@ -13,7 +13,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import com.ndifreke.developers.R;
 import com.ndifreke.developers.dialog.ProfileShareDialog;
-import com.ndifreke.developers.features.githubusers.GithubCacheHelper;
 import com.ndifreke.developers.features.githubusers.GithubUser;
 import com.ndifreke.developers.features.githubusers.GithubUserObserver;
 import android.support.v7.graphics.Palette;
