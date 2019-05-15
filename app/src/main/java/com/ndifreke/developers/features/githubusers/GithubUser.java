@@ -104,7 +104,7 @@ public class GithubUser {
      */
     private void fetchImage() {
         if (image == null && !avatarRequestInFlight.get()) {
-//            new AsyncLoadImage().execute(this.getImageURL());
+            avatarRequestInFlight.set(true);
             ApiExecutor.execute(getGithubImageRunnable());
         }
     }
@@ -125,7 +125,7 @@ public class GithubUser {
     private void notifyListenerOnUpdate() {
         if (this.githubListeners != null)
             for(GithubUserObserver listener : githubListeners)
-            listener.notifyObserver(this);
+                listener.notifyObserver(this);
     }
 
     private Thread imageDownloadThread;
@@ -135,13 +135,14 @@ public class GithubUser {
     }
 
     public Runnable getGithubImageRunnable(){
-      return  new Runnable(){
+        return  new Runnable(){
             @Override
             public void run(){
                 imageDownloadThread = Thread.currentThread();
-             Bitmap bitmap =  new  GithubCacheHelper(GithubUser.this).requestAvatar();
-             image = bitmap;
-             notifyListenerOnUpdate();
+                Bitmap bitmap =  new  GithubCacheHelper(GithubUser.this).requestAvatar();
+                image = bitmap;
+                avatarRequestInFlight.set(false);
+                notifyListenerOnUpdate();
             }
         };
     }

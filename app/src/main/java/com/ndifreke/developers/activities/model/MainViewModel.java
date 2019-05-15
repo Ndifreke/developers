@@ -4,6 +4,7 @@ import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.MutableLiveData;
 import android.arch.lifecycle.ViewModel;
 import android.support.v7.widget.RecyclerView.Adapter;
+import android.util.Log;
 
 import com.ndifreke.developers.activities.GlobalContext;
 import com.ndifreke.developers.adapter.GithubUserAdapter;
@@ -21,20 +22,24 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class MainViewModel extends ViewModel {
 
-    private MutableLiveData<Adapter> githubUserAdapter;
+    private MutableLiveData<Adapter> adapterMutableLiveData;
+    private List<GithubUser> devepers;
 
     public LiveData<Adapter> getGithubAdapter() {
-        if (githubUserAdapter == null) {
-            githubUserAdapter = new MutableLiveData<>();
+        if (adapterMutableLiveData == null || devepers == null) {
+            adapterMutableLiveData = new MutableLiveData<>();
             boolean hasCachedAdapter = GlobalContext.cachedAdapter != null;
             if (hasCachedAdapter) {
-                githubUserAdapter.setValue(GlobalContext.cachedAdapter);
+                setAdapterFromCache(GlobalContext.cachedAdapter);
             }else {
-                githubUserAdapter = new MutableLiveData<>();
                 initGithubAdapter();
             }
         }
-        return githubUserAdapter;
+        return adapterMutableLiveData;
+    }
+
+    private void setAdapterFromCache(Adapter adapter){
+        adapterMutableLiveData.setValue(adapter);
     }
 
     private void initGithubAdapter() {
@@ -49,15 +54,17 @@ public class MainViewModel extends ViewModel {
 
             @Override
             public void onResponse(Call<GithubUserResponse> call, Response<GithubUserResponse> response) {
-                List<GithubUser> devepers = response.body().getDevlopers();
+                devepers = response.body().getDevlopers();
                 GithubUserAdapter adapter = new GithubUserAdapter();
                 adapter.setDataSet(devepers);
                 GlobalContext.cachedAdapter = adapter;
-                githubUserAdapter.postValue(adapter);
+                adapterMutableLiveData.postValue(adapter);
             }
 
             @Override
             public void onFailure(Call<GithubUserResponse> call, Throwable t) {
+                adapterMutableLiveData.postValue(null);
+                Log.i("xxx", t.getMessage());
                 t.printStackTrace();
             }
         });
