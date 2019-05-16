@@ -8,4 +8,7 @@
     <string name="profile_share_dialog_title">Checkout this Awesome Developer</string>
     <string name="dialog_close">Close</string>
     <string name="github_url">Github Link</string>
+    <string name="connection_message">Oops lost connection! </string>
+    <string name="shareIcon">ShareIcon</string>
+    <string name="share">Share</string>
 </resources>

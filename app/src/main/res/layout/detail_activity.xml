@@ -1,13 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-
-<!--<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"-->
-    <!--xmlns:app="http://schemas.android.com/apk/res-auto"-->
-    <!--xmlns:tools="http://schemas.android.com/tools"-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="match_parent"-->
-    <!--android:theme="@style/appbarTheme">-->
-
 <LinearLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -18,91 +10,91 @@
     android:theme="@style/appbarTheme"
     >
 
-        <android.support.v7.widget.Toolbar
-            android:id="@+id/profileToolbar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/primaryColor"
-            android:theme="@style/appbarTheme"
-            app:navigationIcon="@drawable/ic_back_button" />
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/profileToolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/primaryColor"
+        android:theme="@style/appbarTheme"
+        app:navigationIcon="@drawable/ic_back_button" />
 
-        <ImageView
-            android:layout_below="@+id/profileToolbar"
-            android:paddingTop="1dp"
-            android:id="@+id/detailImage"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:scaleType="centerCrop"
-            android:layout_weight="2"
-            android:src="@drawable/ic_profile"
-            android:onClick="toggleToolBar"/>
+    <ImageView
+        android:paddingTop="1dp"
+        android:id="@+id/detailImageView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:scaleType="centerCrop"
+        android:layout_weight="2"
+        android:background="@drawable/ic_profile"
+        android:src="@drawable/ic_profile"
+        android:onClick="toggleToolBar"/>
 
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:orientation="vertical"
+        android:padding="16dp">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:orientation="vertical"
-            android:padding="16dp">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                style="@style/titleText"
-              >
-                <TextView
-                    style="@style/headerText"
-                    android:layout_weight="1"
-                    android:text="@string/github_information"
-                    android:textColor="@color/primaryDarkColor"
-                    android:textSize="24sp"
-                    android:textStyle="bold" />
-
-                <ImageView
-                    style="@style/actionIcon"
-                    android:contentDescription="@string/share_icon"
-                    android:src="@drawable/ic_share"
-                    android:onClick="openShareDialog"/>
-
-            </LinearLayout>
-
+            android:orientation="horizontal"
+            style="@style/titleText"
+            >
             <TextView
-                style="@style/titleText"
-                android:text="Name"
-                android:textColor="@color/primaryDarkColor" />
+                style="@style/headerText"
+                android:layout_weight="1"
+                android:text="@string/github_information"
+                android:textColor="@color/primaryDarkColor"
+                android:textSize="24sp"
+                android:textStyle="bold" />
 
-            <TextView
-                android:id="@+id/detailGithubName"
-                style="@style/normalText"
-                android:text="Ndifreke"
-                android:textColor="@color/secondaryDarkColor" />
+            <ImageView
+                android:id="@+id/shareButton"
+                style="@style/actionIcon"
+                android:contentDescription="@string/shareIcon"
+                android:src="@drawable/ic_share"
+                android:onClick="openShareDialog"/>
 
-            <TextView
-                style="@style/titleText"
-                android:text="Organization"
-                android:textColor="@color/primaryDarkColor" />
+        </LinearLayout>
 
-            <TextView
-                android:id="@+id/githubNameOrganization"
-                style="@style/normalText"
-                android:text="None"
-                android:textColor="@color/secondaryDarkColor" />
+        <TextView
+            style="@style/titleText"
+            android:text="Name"
+            android:textColor="@color/primaryDarkColor" />
 
-            <TextView
-                style="@style/titleText"
-                android:text="@string/github_url"
-                android:textColor="@color/primaryDarkColor" />
+        <TextView
+            android:id="@+id/detailGithubName"
+            style="@style/normalText"
+            android:text="Ndifreke"
+            android:textColor="@color/secondaryDarkColor" />
 
-            <TextView
-                android:id="@+id/detailGithubLink"
-                style="@style/normalText"
-                android:text="http://github.com/link/to/profile"
-                android:textColor="@color/secondaryDarkColor"
-                android:textFontWeight="1" />
+        <TextView
+            style="@style/titleText"
+            android:text="Organization"
+            android:textColor="@color/primaryDarkColor" />
+
+        <TextView
+            android:id="@+id/githubNameOrganization"
+            style="@style/normalText"
+            android:text="None"
+            android:textColor="@color/secondaryDarkColor" />
+
+        <TextView
+            style="@style/titleText"
+            android:text="@string/github_url"
+            android:textColor="@color/primaryDarkColor" />
+
+        <TextView
+            android:autoLink="all"
+            android:id="@+id/detailGithubLink"
+            style="@style/normalText"
+            android:text="http://github.com/link/to/profile"
+            android:textColor="@color/secondaryDarkColor"
+            android:textFontWeight="1" />
 
     </LinearLayout>
 
 </LinearLayout>
-
-<!--</ScrollView>-->

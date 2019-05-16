@@ -32,23 +32,24 @@ public class DetailActivity extends AppCompatActivity {
 
         String profileID
                 = intent.getStringExtra(GithubUser.ID);
-
         this.githubUser = GlobalContext.cachedUsers.get(profileID);
-        githubUser.setListener(new GithubUserObserver<GithubUser>() {
-            @Override
-            public void notifyObserver(GithubUser user) {
-                setViewContent(user);
-            }
-        });
 
-        githubUser.requestUpate();
-        this.setViewContent(githubUser);
+        if( this.githubUser != null ) {
+            githubUser.setListener(new GithubUserObserver<GithubUser>() {
+                @Override
+                public void notifyObserver(GithubUser user) {
+                    setViewContent(user);
+                }
+            });
+            githubUser.requestUpate();
+            this.setViewContent(githubUser);
+        }
     }
 
     public void initToolbar() {
         Toolbar toolbar = findViewById(R.id.profileToolbar);
         setSupportActionBar(toolbar);
-         actionBar = getSupportActionBar();
+        actionBar = getSupportActionBar();
         if (actionBar != null) {
             actionBar.setTitle(getResources().getString(R.string.PROFILE_TITLE));
             actionBar.setDisplayHomeAsUpEnabled(true);
@@ -59,7 +60,7 @@ public class DetailActivity extends AppCompatActivity {
         TextView name = findViewById(R.id.detailGithubName);
         name.setText(githubUser.getUsername());
         TextView profileLink = findViewById(R.id.detailGithubLink);
-        ImageView avatar = findViewById(R.id.detailImage);
+        ImageView avatar = findViewById(R.id.detailImageView);
         avatar.setImageBitmap(githubUser.getImageResource());
         toolBarColorFromPalette(githubUser.getImageResource()); //
         profileLink.setText(githubUser.getProfileURL());
@@ -68,8 +69,13 @@ public class DetailActivity extends AppCompatActivity {
     }
 
     public void openShareDialog(View view) {
-        dialog = new ProfileShareDialog(this.githubUser);
+        dialog = new ProfileShareDialog();
+        dialog.setGithubUser(this.githubUser);
         dialog.show(getSupportFragmentManager(), null);
+    }
+
+    public void setGithubUser(GithubUser user){
+        this.githubUser = user;
     }
 
     public void shareProfile(View view) {
@@ -92,14 +98,16 @@ public class DetailActivity extends AppCompatActivity {
         }
     }
 
-    public void toolBarColorFromPalette(Bitmap profileImage){
-      Palette.from(profileImage).generate(new Palette.PaletteAsyncListener() {
-            @Override
-            public void onGenerated(@Nullable Palette palette) {
-                int rgb = palette.getDominantSwatch().getRgb();
-                actionBar.setBackgroundDrawable(new ColorDrawable(rgb));
-            }
-        });
+    public void toolBarColorFromPalette(Bitmap profileImage) {
+        if (profileImage != null){
+            Palette.from(profileImage).generate(new Palette.PaletteAsyncListener() {
+                @Override
+                public void onGenerated(@Nullable Palette palette) {
+                    int rgb = palette.getDominantSwatch().getRgb();
+                    actionBar.setBackgroundDrawable(new ColorDrawable(rgb));
+                }
+            });
 
+        }
     }
 }
