@@ -36,6 +36,7 @@ public class MainActivity extends AppCompatActivity {
         init();
     }
 
+
     public void onRefresh(View v) {
         v.setVisibility(View.INVISIBLE);
         init();

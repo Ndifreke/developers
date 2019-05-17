@@ -1,6 +1,8 @@
 [![CircleCI](https://circleci.com/gh/Ndifreke/developers/tree/develop.svg?style=svg)](https://circleci.com/gh/Ndifreke/developers/tree/develop)
+[![Build Status](https://travis-ci.com/Ndifreke/developers.svg?branch=develop)](https://travis-ci.com/Ndifreke/developers)
 [![Maintainability](https://api.codeclimate.com/v1/badges/001155f31a02dbd342a5/maintainability)](https://codeclimate.com/github/Ndifreke/developers/maintainability)
-## Developers
+[![codecov](https://codecov.io/gh/Ndifreke/developers/branch/develop/graph/badge.svg)](https://codecov.io/gh/Ndifreke/developers)
+# Developers
 
 Developers is a level up application built in process to onboard the Android team of my 
 Organization. It shows a list of developers and their information fetched from github API, 

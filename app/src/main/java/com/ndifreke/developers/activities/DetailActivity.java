@@ -56,16 +56,22 @@ public class DetailActivity extends AppCompatActivity {
         }
     }
 
-    public void setViewContent(GithubUser githubUser) {
-        TextView name = findViewById(R.id.detailGithubName);
-        name.setText(githubUser.getUsername());
-        TextView profileLink = findViewById(R.id.detailGithubLink);
-        ImageView avatar = findViewById(R.id.detailImageView);
-        avatar.setImageBitmap(githubUser.getImageResource());
-        toolBarColorFromPalette(githubUser.getImageResource()); //
-        profileLink.setText(githubUser.getProfileURL());
-        TextView organizationView = findViewById(R.id.githubNameOrganization);
-        organizationView.setText(githubUser.getCompany());
+    public void setViewContent(final GithubUser githubUser) {
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                TextView name = findViewById(R.id.detailGithubName);
+                name.setText(githubUser.getUsername());
+                TextView profileLink = findViewById(R.id.detailGithubLink);
+                ImageView avatar = findViewById(R.id.detailImageView);
+                avatar.setImageBitmap(githubUser.getImageResource());
+                toolBarColorFromPalette(githubUser.getImageResource()); //
+                profileLink.setText(githubUser.getProfileURL());
+                TextView organizationView = findViewById(R.id.githubOrganization);
+                System.out.println(githubUser.getCompany());
+                organizationView.setText(githubUser.getCompany());
+            }
+        });
     }
 
     public void openShareDialog(View view) {
