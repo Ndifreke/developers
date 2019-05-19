@@ -2,8 +2,6 @@ package com.ndifreke.developers.activities;
 
 import android.app.Application;
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.support.v7.widget.RecyclerView;
 
 import com.ndifreke.developers.features.githubusers.GithubUser;

@@ -81,10 +81,6 @@ public class GithubUser {
         return image;
     }
 
-    public String getName() {
-        return this.name;
-    }
-
     /**
      * Request for the full details of this Github user
      * if this user has requested update before, this
@@ -128,17 +124,10 @@ public class GithubUser {
                 listener.notifyObserver(this);
     }
 
-    private Thread imageDownloadThread;
-
-    public Thread getImageLoadThread(){
-        return imageDownloadThread;
-    }
-
     public Runnable getGithubImageRunnable(){
         return  new Runnable(){
             @Override
             public void run(){
-                imageDownloadThread = Thread.currentThread();
                 Bitmap bitmap =  new  GithubCacheHelper(GithubUser.this).requestAvatar();
                 image = bitmap;
                 avatarRequestInFlight.set(false);

@@ -90,17 +90,18 @@ public class DetailActivityTest {
 
     @Test
     public void displayGithubDataOnShareDialog(){
-        final String name = "checkName";
+        final String username = "checkName";
         final String profileUrl = "https://checkname.com";
+        final String name = "Torry";
         GithubUser mockUser = mock(GithubUser.class);
-        when(mockUser.getUsername()).thenReturn(name);
+        when(mockUser.getUsername()).thenReturn(username);
         when(mockUser.getProfileURL()).thenReturn(profileUrl);
         clickDialog(mockUser);
 
-       onView(withId(R.id.share_github_name))
-               .check(matches(withText("@"+name)));
-       onView(withId(R.id.share_github_url))
-               .check(matches(withText(profileUrl)));
+        onView(withId(R.id.share_github_name))
+                .check(matches(withText("@"+username)));
+        onView(withId(R.id.share_github_url))
+                .check(matches(withText(profileUrl)));
     }
 
     private void mockGithubFragmentUpdate(GithubUserFragment mockFragment, GithubUser user, Map<String, String> data){
