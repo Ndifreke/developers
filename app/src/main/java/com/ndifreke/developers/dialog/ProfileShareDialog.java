@@ -3,7 +3,7 @@ package com.ndifreke.developers.dialog;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatDialogFragment;
+import androidx.appcompat.app.AppCompatDialogFragment;
 import android.view.View;
 import android.widget.TextView;
 import com.ndifreke.developers.R;

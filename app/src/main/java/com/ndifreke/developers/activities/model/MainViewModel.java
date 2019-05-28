@@ -1,9 +1,9 @@
 package com.ndifreke.developers.activities.model;
 
-import android.arch.lifecycle.LiveData;
-import android.arch.lifecycle.MutableLiveData;
-import android.arch.lifecycle.ViewModel;
-import android.support.v7.widget.RecyclerView.Adapter;
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
+import androidx.lifecycle.ViewModel;
+import androidx.recyclerview.widget.RecyclerView.Adapter;
 import android.util.Log;
 
 import com.ndifreke.developers.activities.GlobalContext;

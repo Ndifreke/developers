@@ -1,27 +1,26 @@
 package com.ndifreke.developers;
 
 import android.content.Context;
-import android.support.test.InstrumentationRegistry;
+import android.widget.ImageView;
 
-import static android.support.test.espresso.action.ViewActions.*;
-import static android.support.test.espresso.assertion.ViewAssertions.*;
-import static android.support.test.espresso.matcher.ViewMatchers.*;
+import androidx.test.InstrumentationRegistry;
 
-import android.support.test.espresso.ViewInteraction;
-import android.support.test.espresso.matcher.ViewMatchers;
-import android.support.test.rule.ActivityTestRule;
-import android.support.test.runner.AndroidJUnit4;
+import static androidx.test.espresso.action.ViewActions.*;
+import static androidx.test.espresso.assertion.ViewAssertions.*;
+import static androidx.test.espresso.matcher.ViewMatchers.*;
 
-import static org.hamcrest.core.IsNot.*;
+import androidx.test.espresso.ViewInteraction;
+import androidx.test.espresso.matcher.ViewMatchers;
+import androidx.test.ext.junit.runners.AndroidJUnit4;
+import androidx.test.rule.ActivityTestRule;
+import static  org.hamcrest.Matchers.*;
 import static org.mockito.Mockito.*;
-import static android.support.test.espresso.Espresso.*;
-
+import static androidx.test.espresso.Espresso.*;
 import com.ndifreke.developers.activities.DetailActivity;
 import com.ndifreke.developers.features.githubusers.GithubUser;
 import com.ndifreke.developers.features.githubusers.GithubUserFragment;
-
 import org.junit.After;
-import static org.junit.Assert.*;
+
 
 import org.junit.Before;
 import org.junit.Rule;
@@ -50,12 +49,6 @@ public class DetailActivityTest {
     }
 
     @Test
-    public void useAppContext() {
-        Context appContext = InstrumentationRegistry.getTargetContext();
-        assertEquals("com.ndifreke.developers", appContext.getPackageName());
-    }
-
-    @Test
     public void toggleToolBarOnProfileImageClick() {
         ViewInteraction toolBar = onView(withId(R.id.profileToolbar));
         toolBar.check(matches(isDisplayed()));
@@ -65,11 +58,6 @@ public class DetailActivityTest {
         toolBar.check(matches(isCompletelyDisplayed()));
     }
 
-    @Test
-    public void profileImageExist() {
-        onView(withId(R.id.detailImageView))
-                .check(matches(ViewMatchers.hasBackground(R.drawable.ic_profile)));
-    }
 
     public void shareButtonIsClickable() {
 

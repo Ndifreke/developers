@@ -9,11 +9,8 @@ import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.HashMap;
-import java.util.Map;
 
-import android.support.v7.widget.RecyclerView.Adapter;
-import android.util.Log;
+import androidx.recyclerview.widget.RecyclerView.Adapter;
 
 /**
  * Writes and Read a Github user data from the disk,
