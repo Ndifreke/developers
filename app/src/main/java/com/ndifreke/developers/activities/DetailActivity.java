@@ -4,10 +4,10 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -15,7 +15,7 @@ import com.ndifreke.developers.R;
 import com.ndifreke.developers.dialog.ProfileShareDialog;
 import com.ndifreke.developers.features.githubusers.GithubUser;
 import com.ndifreke.developers.features.githubusers.GithubUserObserver;
-import android.support.v7.graphics.Palette;
+import androidx.palette.graphics.Palette;
 
 public class DetailActivity extends AppCompatActivity {
     private GithubUser githubUser;
