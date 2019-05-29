@@ -13,12 +13,16 @@ import com.ndifreke.developers.R;
 import com.ndifreke.developers.features.githubusers.GithubUser;
 import com.ndifreke.developers.activities.DetailActivity;
 
+import butterknife.BindView;
+import butterknife.OnClick;
+
 public class DeveloperViewHolder extends RecyclerView.ViewHolder{
 
     private RelativeLayout viewHolder;
     private TextView gihubNameView;
     private ImageView avatarView;
     private Context context;
+    private GithubUser githubUser;
 
     public DeveloperViewHolder(RelativeLayout view, final Context context) {
         super(view);
@@ -28,16 +32,25 @@ public class DeveloperViewHolder extends RecyclerView.ViewHolder{
         this.context = context;
     }
 
-    public void setDeveloper(final GithubUser developer){
-        this.setName(developer.getUsername());
-        this.setImage(developer.getImageResource());
+//    @BindView(R.id.viewHolder) View v;
+//    public void showProfile(View view){
+//        Intent intent = DetailActivity.startIntent(context);
+//        intent.putExtra(GithubUser.ID, this.githubUser.getProfileURL());
+//        context.startActivity(intent);
+//    }
 
+    public void setDeveloper(final GithubUser githubUser){
+        this.setName(githubUser.getUsername());
+        this.setImage(githubUser.getImageResource());
+        this.githubUser = githubUser;
+//
+//
         viewHolder.setOnClickListener(
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Intent intent = new Intent(context, DetailActivity.class);
-                        intent.putExtra(GithubUser.ID, developer.getProfileURL());
+                        Intent intent = DetailActivity.startIntent(context);
+                        intent.putExtra(GithubUser.ID, githubUser.getProfileURL());
                         context.startActivity(intent);
                     }
                 });
