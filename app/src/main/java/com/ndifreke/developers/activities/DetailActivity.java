@@ -1,5 +1,6 @@
 package com.ndifreke.developers.activities;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.ColorDrawable;
@@ -17,6 +18,9 @@ import com.ndifreke.developers.features.githubusers.GithubUser;
 import com.ndifreke.developers.features.githubusers.GithubUserObserver;
 import androidx.palette.graphics.Palette;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 public class DetailActivity extends AppCompatActivity {
     private GithubUser githubUser;
     private ProfileShareDialog dialog;
@@ -33,7 +37,7 @@ public class DetailActivity extends AppCompatActivity {
         String profileID
                 = intent.getStringExtra(GithubUser.ID);
         this.githubUser = GlobalContext.cachedUsers.get(profileID);
-
+        ButterKnife.bind(this);
         if( this.githubUser != null ) {
             githubUser.setListener(new GithubUserObserver<GithubUser>() {
                 @Override
@@ -44,6 +48,11 @@ public class DetailActivity extends AppCompatActivity {
             githubUser.requestUpate();
             this.setViewContent(githubUser);
         }
+
+    }
+
+    public static Intent startIntent(Context context){
+        return new Intent(context, DetailActivity.class);
     }
 
     public void initToolbar() {
@@ -56,19 +65,18 @@ public class DetailActivity extends AppCompatActivity {
         }
     }
 
+    @BindView(R.id.detailGithubName) TextView name;
+    @BindView(R.id.detailGithubLink) TextView profileLink;
+    @BindView(R.id.detailImageView)  ImageView avatar;
+    @BindView(R.id.githubOrganization) TextView organizationView;
     public void setViewContent(final GithubUser githubUser) {
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                TextView name = findViewById(R.id.detailGithubName);
                 name.setText(githubUser.getUsername());
-                TextView profileLink = findViewById(R.id.detailGithubLink);
-                ImageView avatar = findViewById(R.id.detailImageView);
                 avatar.setImageBitmap(githubUser.getImageResource());
-                toolBarColorFromPalette(githubUser.getImageResource()); //
+                toolBarColorFromPalette(githubUser.getImageResource());
                 profileLink.setText(githubUser.getProfileURL());
-                TextView organizationView = findViewById(R.id.githubOrganization);
-                System.out.println(githubUser.getCompany());
                 organizationView.setText(githubUser.getCompany());
             }
         });
