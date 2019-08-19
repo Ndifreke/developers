@@ -7,9 +7,13 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView.Adapter;
 import androidx.appcompat.widget.Toolbar;
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import androidx.appcompat.app.ActionBar;
 import androidx.recyclerview.widget.RecyclerView;
+
+import android.util.Log;
 import android.view.View;
 
 import com.ndifreke.developers.R;
@@ -34,6 +38,9 @@ public class MainActivity extends AppCompatActivity {
             actionBar.setTitle("Nairobi Developers");
         }
         init();
+       new NetworkUtil.ConnectedCallBack(()-> {
+           runOnUiThread(()->this.init());
+       }).listen(this);
     }
 
 
@@ -44,6 +51,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void init() {
+        Log.i("fixbug", "NETWORK CHANGED");
         //show loader here
         if (NetworkUtil.isConnected(this)) {
             MainViewModel model = ViewModelProviders.of(this).get(MainViewModel.class);
