@@ -11,7 +11,7 @@ buildscript {
         
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.4.1'
+        classpath 'com.android.tools.build:gradle:3.4.2'
         classpath "com.vanniktech:gradle-android-junit-jacoco-plugin:0.15.0-SNAPSHOT"
         
         // NOTE: Do not place your application dependencies here; they belong
